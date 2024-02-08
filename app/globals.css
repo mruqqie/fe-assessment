@@ -65,14 +65,7 @@ body {
   cursor: pointer;
 }
 
-/* w-4
-											   h-4
-											   appearance-none
-											   checked:bg-purple-100
-											   checked:border-purple-400
-											   checked:text-white
-											   hover:bg-purple-100
-											   hover:border-purple-400
-											   border border-l-2
-											   border-t-2 rounded
-											   border-[#D0D5DD] */
+.gradient-background {
+  background: linear-gradient(180deg, rgba(238, 238, 238, 0.521) 0%, rgba(64, 63, 63, 0.4) 100%);
+  border-top: 1px solid rgba(255, 255, 255, 0.5)
+}
