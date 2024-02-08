@@ -18,4 +18,6 @@ export interface User {
 export interface UserContextValue {
 	user: User | null;
 	signup: (userData: User) => void;
+	login: (username: string, password: string) => void;
+	logout: () => void
 }

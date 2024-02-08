@@ -3,21 +3,40 @@ import Image from "next/image";
 import React, { ChangeEvent, useState } from "react";
 import LoginImage from "../assets/loginimg.jpeg";
 import { LoginFormData } from "../constants";
+import { useUserContext } from "../context/UserContext";
+import { useRouter } from "next/navigation";
 
 const Login = () => {
+	const { login } = useUserContext();
 	const [formData, setFormData] = useState<LoginFormData>({
 		email: "",
 		password: "",
 	});
 	const [isChecked, setIsChecked] = useState<boolean>(false);
-	const handleSubmit = () => {};
+	const router = useRouter();
+
 	const handleCheckboxChange = (e: ChangeEvent<HTMLInputElement>) => {
 		setIsChecked(e.target.checked);
 	};
+
 	const handleChange = (
 		e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
 	) => {
 		setFormData({ ...formData, [e.target.name]: e.target.value });
+	};
+
+	const handleSubmit = (e: React.FormEvent) => {
+		e.preventDefault();
+		try {
+			const userData = {
+				email: formData.email,
+				password: formData.password,
+			};
+			login(userData.email, userData.password);
+			
+		} catch (error) {
+			console.error("Error logging in:", error);
+		}
 	};
 	return (
 		<div className="flex row w-[100%] h-[100vh]">
