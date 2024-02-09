@@ -8,7 +8,7 @@ const Dashboard = () => {
 	return (
 		<div className="flex flex-row w-[100%] h-[100vh]">
 			<Sidebar />
-			<div className="w-[80%] flex flex-col p-4 border-black">
+			<div className="w-[80%] flex flex-col py-4 px-8 border-black">
 				<Header />
 				<Metrics />
 				<Main />

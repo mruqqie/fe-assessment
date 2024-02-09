@@ -2,28 +2,31 @@ import Image from "next/image";
 import React from "react";
 import courseImg from "../assets/courseImg.jpeg";
 import arrowIcon from "../assets/arrowIcon.png";
+import Calendar from "./Calendar";
 
 const Main = () => {
 	return (
-		<div className="flex pt-4 justify-between">
+		<div className="flex pt-7 justify-between">
 			<div className="flex flex-col gap-3 w-[370px]">
 				<h1 className="text-[#333333] text-md font-[600]">
 					MY COURSES
 				</h1>
-				<div className="relative w-100% h-[200px]">
+				<div className="relative w-100% h-[210px]">
 					<Image
 						src={courseImg}
 						alt="Course Image"
 						width={1000}
 						height={1000}
-						className="w-100% h-[200px]"
+						className="w-100% h-[210px]"
 					/>
 					<div className="flex justify-between absolute bottom-0 left-0 right-0 p-3 backdrop-blur-sm border-t gradient-background">
 						<div className="text-sm text-white opacity-100">
 							<p>Muhammad Olamilekan</p>
 							<p>Tutor</p>
 						</div>
-						<p className="text-sm text-[#BA20FE] opacity-100">4 weeks</p>
+						<p className="text-sm text-[#BA20FE] opacity-100">
+							4 weeks
+						</p>
 					</div>
 				</div>
 				<div className="flex flex-col gap-1">
@@ -50,7 +53,19 @@ const Main = () => {
 					</div>
 				</div>
 			</div>
-			<div>calendar</div>
+			<div className="flex flex-col gap-6 items-start">
+				<Calendar />
+				<div className="w-[370px] flex flex-col gap-8">
+					<p>Activity</p>
+					<div className="flex flex-col gap-6 border-l-[6px] border-[#BA20FE] pl-8">
+						<p>No recent activity</p>
+						<p>
+							Lorem ipsum dolor sit amet, consectetur adipiscing
+							elit, sed do eiusmod tempor incididunt ut labo...
+						</p>
+					</div>
+				</div>
+			</div>
 		</div>
 	);
 };
