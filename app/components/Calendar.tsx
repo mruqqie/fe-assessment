@@ -27,7 +27,7 @@ const Calendar = () => {
 
 	return (
 		<div className="flex items-start flex-col pt-4 sm:pt-0">
-			<div className="overflow-x-scroll scroll scroll-smooth whitespace-nowrap no-scrollbar w-[190px] xs:w-[230px] sm:w-[270px] md:w-[220px] lg:w-[290px]">
+			<div className="overflow-x-scroll scroll scroll-smooth whitespace-nowrap no-scrollbar w-[192px] xs:w-[230px] sm:w-[270px] md:w-[220px] lg:w-[290px]">
 				{[...Array(8)].map((_, weekIndex) => (
 					<div key={weekIndex} className="inline-block">
 						<div className="flex justify-between items-center">

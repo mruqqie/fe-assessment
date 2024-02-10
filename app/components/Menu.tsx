@@ -14,7 +14,7 @@ import { useUserContext } from "../context/UserContext";
 
 const Menu = () => {
 	const [open, setOpen] = React.useState(false);
-	const { logout } = useUserContext();
+	const { logout, user, username } = useUserContext();
 
 	const handleOpen = () => {
 		setOpen(!open);
@@ -141,10 +141,10 @@ const Menu = () => {
 								/>
 								<div>
 									<p className="font-[600] text-sm text-[#344054]">
-										Olivia Rhye
+										{username ? username : "Olivia"} Rhye
 									</p>
 									<p className=" text-[11px] text-[#475467]">
-										olivia@gmail.com
+										{user ? user.email : "olivia@gmail.com"}
 									</p>
 								</div>
 							</div>

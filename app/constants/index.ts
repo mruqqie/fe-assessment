@@ -9,6 +9,13 @@ export interface SignupFormData {
 	password: string;
 }
 
+export interface UserData {
+	response: {
+		email: string;
+		firstname: string;
+	};
+}
+
 export interface User {
 	name: string;
 	email: string;
@@ -17,7 +24,8 @@ export interface User {
 
 export interface UserContextValue {
 	user: User | null;
+	username: string | null;
 	signup: (userData: User) => void;
 	login: (username: string, password: string) => void;
-	logout: () => void
+	logout: () => void;
 }

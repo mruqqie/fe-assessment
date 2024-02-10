@@ -7,7 +7,7 @@ import {
 	useState,
 } from "react";
 import { useRouter } from "next/navigation";
-import { User, UserContextValue } from "../constants";
+import { User, UserContextValue, UserData } from "../constants";
 import axios from "axios";
 import { useCookies } from "react-cookie";
 
@@ -18,58 +18,29 @@ interface UserContextProps {
 const UserContext = createContext<UserContextValue | undefined>(undefined);
 
 export const UserProvider: React.FC<UserContextProps> = ({ children }) => {
+	const [cookies, setCookie, removeCookie] = useCookies(["user", "username"]);
 	const [user, setUser] = useState<User | null>(null);
-	const [cookies, setCookie, removeCookie] = useCookies(["user"]);
+	const [username, setUsername] = useState<string | null>(null)
 	const router = useRouter();
 
 	useEffect(() => {
-        const userData = cookies["user"];
-        if (userData) {
-            setUser(userData);
-        }
-    }, [cookies]);
-	useEffect(() => {
-		console.log(user);
-	}, [user]);
-	// const hashPassword = async (password: string) => {
-	// 	const encoder = new TextEncoder();
-	// 	const data = encoder.encode(password);
-
-	// 	const hashedBuffer = await crypto.subtle.digest("SHA-256", data);
-	// 	const hashedPassword = Array.from(new Uint8Array(hashedBuffer))
-	// 		.map((byte) => String.fromCharCode(byte))
-	// 		.join("");
-
-	// 	const uppercaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	// 	const lowercaseChars = "abcdefghijklmnopqrstuvwxyz";
-	// 	const specialChars = "!@#$%^&*()-_+=[]{}|;:,.<>?";
-	// 	const numberChars = "0123456789";
-
-	// 	const requiredChars = [
-	// 		uppercaseChars[Math.floor(Math.random() * uppercaseChars.length)],
-	// 		lowercaseChars[Math.floor(Math.random() * lowercaseChars.length)],
-	// 		specialChars[Math.floor(Math.random() * specialChars.length)],
-	// 		numberChars[Math.floor(Math.random() * numberChars.length)],
-	// 	];
-
-	// 	const remainingLength = 64 - 4;
-	// 	const randomChars = Array.from({ length: remainingLength }, () => {
-	// 		const chars =
-	// 			uppercaseChars + lowercaseChars + specialChars + numberChars;
-	// 		return chars[Math.floor(Math.random() * chars.length)];
-	// 	});
-
-	// 	const finalPassword = requiredChars
-	// 		.concat(randomChars)
-	// 		.sort(() => Math.random() - 0.5)
-	// 		.join("");
-
-	// 	return finalPassword;
-	// };
+		const fetchData = async () => {
+			try {
+				const userData = cookies["user"];
+				const username = cookies["username"]
+				if (userData) {
+					setUser(userData);
+					setUsername(username)
+				}
+			} catch (error) {
+				console.error("Error fetching user data:", error);
+			}
+		};
+		fetchData();
+	}, [cookies]);
 
 	const signup = async (userData: User) => {
 		try {
-			//const hashedPassword = await hashPassword(userData.password);
 			const response = await axios.post(
 				"https://devapi.omacart.com/signup",
 				{
@@ -91,20 +62,25 @@ export const UserProvider: React.FC<UserContextProps> = ({ children }) => {
 
 	const login = async (email: string, password: string) => {
 		try {
-			//const hashedPassword = await hashPassword(password);
-	
-			const response = await axios.post("https://devapi.omacart.com/login", {
-				email,
-				password
-			}, {
-				headers: {
-					"Content-Type": "application/json",
+			const response = await axios.post(
+				"https://devapi.omacart.com/login",
+				{
+					email,
+					password,
 				},
-			});
-	
+				{
+					headers: {
+						"Content-Type": "application/json",
+					},
+				}
+			);
+
 			if (response.status === 200) {
-				const userData = response.data;
+				const userData = response.data.response;
+				const username = response.data.response.firstName
+				setUsername(username)
 				setCookie("user", JSON.stringify(userData), { path: "/" });
+				setCookie("username", username, {path: "/"})
 				setUser(userData);
 				router.push("/");
 			} else {
@@ -112,20 +88,24 @@ export const UserProvider: React.FC<UserContextProps> = ({ children }) => {
 			}
 		} catch (error) {
 			console.error("Error during login:", error);
+			alert(error)
 		}
 	};
 
 	const logout = () => {
 		removeCookie("user");
+		removeCookie("username")
 		setUser(null);
+		setUsername(null)
 		router.push("/login");
 	};
 
 	const contextValue: UserContextValue = {
 		user,
+		username,
 		signup,
 		login,
-		logout
+		logout,
 	};
 
 	return (

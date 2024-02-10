@@ -13,7 +13,7 @@ import userImg from "../assets/userimg.jpeg";
 import { useUserContext } from "../context/UserContext";
 
 const Sidebar = () => {
-	const { logout } = useUserContext();
+	const { logout, user, username } = useUserContext();
 	const handleLogout = () => {
 		logout();
 	};
@@ -125,10 +125,10 @@ const Sidebar = () => {
 						/>
 						<div>
 							<p className="font-[600] text-sm text-[#344054]">
-								Olivia Rhye
+								{username ? username : "Olivia"} Rhye
 							</p>
 							<p className=" text-[11px] md:text-xs lg:text-sm text-[#475467]">
-								olivia@gmail.com
+								{user ? user.email : "olivia@gmail.com"}
 							</p>
 						</div>
 					</div>
