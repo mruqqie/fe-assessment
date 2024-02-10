@@ -29,7 +29,7 @@ export const UserProvider: React.FC<UserContextProps> = ({ children }) => {
         }
     }, [cookies]);
 	useEffect(() => {
-		console.log(user); // Log user after it has been set
+		console.log(user);
 	}, [user]);
 	// const hashPassword = async (password: string) => {
 	// 	const encoder = new TextEncoder();

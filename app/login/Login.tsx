@@ -13,7 +13,6 @@ const Login = () => {
 		password: "",
 	});
 	const [isChecked, setIsChecked] = useState<boolean>(false);
-	const router = useRouter();
 
 	const handleCheckboxChange = (e: ChangeEvent<HTMLInputElement>) => {
 		setIsChecked(e.target.checked);

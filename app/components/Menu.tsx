@@ -10,12 +10,18 @@ import supportIcon from "../assets/supportIcon.png";
 import settingsIcon from "../assets/settingsIcon.png";
 import logoutIcon from "../assets/logoutIcon.png";
 import userImg from "../assets/userimg.jpeg";
+import { useUserContext } from "../context/UserContext";
 
 const Menu = () => {
 	const [open, setOpen] = React.useState(false);
+	const { logout } = useUserContext();
 
 	const handleOpen = () => {
 		setOpen(!open);
+	};
+
+	const handleLogout = () => {
+		logout();
 	};
 
 	return (
@@ -30,7 +36,10 @@ const Menu = () => {
 			>
 				{open ? (
 					<ul className="flex flex-col gap-2 h-[100vh] shadow-xl p-4 rounded-md border border-gray-300 transition-all">
-						<button className="flex justify-end" onClick={handleOpen}>
+						<button
+							className="flex justify-end"
+							onClick={handleOpen}
+						>
 							<p className="text-right px-1 rounded-md w-max bg-gray-300">
 								X
 							</p>
@@ -122,13 +131,13 @@ const Menu = () => {
 							</p>
 						</li>
 						<li className="flex justify-between pt-3">
-							<div className="flex gap-1 lg:gap-3">
+							<div className="flex gap-3">
 								<Image
 									src={userImg}
 									alt="User Avatar"
 									width={1000}
 									height={1000}
-									className="w-[28px] h-[28px] rounded-[50%]"
+									className="w-[40px] h-[40px] rounded-[50%]"
 								/>
 								<div>
 									<p className="font-[600] text-sm text-[#344054]">
@@ -144,7 +153,8 @@ const Menu = () => {
 								alt="Logout Icon"
 								width={1000}
 								height={1000}
-								className="w-[15px] h-[15px]"
+								className="w-[15px] h-[15px] hover:cursor-pointer"
+								onClick={handleLogout}
 							/>
 						</li>
 					</ul>

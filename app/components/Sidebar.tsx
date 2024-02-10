@@ -9,6 +9,7 @@ import supportIcon from "../assets/supportIcon.png";
 import settingsIcon from "../assets/settingsIcon.png";
 import logoutIcon from "../assets/logoutIcon.png";
 import userImg from "../assets/userimg.jpeg";
+import { useUserContext } from "../context/UserContext";
 
 const Sidebar = () => {
 	return (
@@ -109,7 +110,7 @@ const Sidebar = () => {
 					</li>
 				</ul>
 				<div className="flex border-t border-gray-200 px-2 gap-[25px] md:gap-[40px] lg:gap-[47px] justify-between pt-6 lg:px-2">
-					<div className="flex gap-1 lg:gap-3">
+					<div className="flex gap-3 lg:gap-3">
 						<Image
 							src={userImg}
 							alt="User Avatar"
