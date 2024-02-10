@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 
 const Login = () => {
 	const { login } = useUserContext();
+	const router = useRouter();
 	const [formData, setFormData] = useState<LoginFormData>({
 		email: "",
 		password: "",
@@ -32,7 +33,6 @@ const Login = () => {
 				password: formData.password,
 			};
 			login(userData.email, userData.password);
-			
 		} catch (error) {
 			console.error("Error logging in:", error);
 		}
@@ -117,7 +117,12 @@ const Login = () => {
 					<div>
 						<p className="font-[400] text-sm">
 							Don't have an account?{" "}
-							<span className="font-[600] text-[#27779B] hover:text-purple-800 hover:cursor-pointer">
+							<span
+								onClick={() => {
+									router.push("/signup");
+								}}
+								className="font-[600] text-[#27779B] hover:text-purple-800 hover:cursor-pointer"
+							>
 								Sign up
 							</span>
 						</p>

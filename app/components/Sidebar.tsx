@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import React from "react";
 import searchIcon from "../assets/searchIcon.png";
@@ -12,6 +13,10 @@ import userImg from "../assets/userimg.jpeg";
 import { useUserContext } from "../context/UserContext";
 
 const Sidebar = () => {
+	const { logout } = useUserContext();
+	const handleLogout = () => {
+		logout();
+	};
 	return (
 		<div className="hidden sticky lg:w-[20%] border-r border-gray-200 h-[100vh] sm:flex flex-col justify-between">
 			<div className="flex flex-col gap-4 pt-12 lg:pt-16">
@@ -132,7 +137,8 @@ const Sidebar = () => {
 						alt="Logout Icon"
 						width={1000}
 						height={1000}
-						className="w-[15px] h-[15px]"
+						className="w-[15px] h-[15px] hover:cursor-pointer"
+						onClick={handleLogout}
 					/>
 				</div>
 			</div>

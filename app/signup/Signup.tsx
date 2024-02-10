@@ -162,9 +162,14 @@ const Signup = () => {
 					</div>
 					<div>
 						<p className="font-[400] text-sm">
-							Don't have an account?{" "}
-							<span className="font-[600] text-[#27779B] hover:text-purple-800 hover:cursor-pointer">
-								Sign up
+							Already have an account?{" "}
+							<span
+								onClick={() => {
+									router.push("/login");
+								}}
+								className="font-[600] text-[#27779B] hover:text-purple-800 hover:cursor-pointer"
+							>
+								Log in
 							</span>
 						</p>
 					</div>
