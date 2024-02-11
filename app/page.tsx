@@ -35,7 +35,7 @@ export default function Home() {
 
 	if (!user && !timeoutReached) {
 		return (
-			<div className="sweet-loading flex bg-[#f3f3f3] h-[100vh] items-center">
+			<div className="flex bg-[#f3f3f3] h-[100vh] items-center">
             <PulseLoader
                 color={'#0F88D9'}
                 cssOverride={override}

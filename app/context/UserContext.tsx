@@ -57,6 +57,7 @@ export const UserProvider: React.FC<UserContextProps> = ({ children }) => {
 			}
 		} catch (error) {
 			console.error("Error during signup:", error);
+			alert("Error signing up, please try again.")
 		}
 	};
 

@@ -5,6 +5,13 @@ import LoginImage from "../assets/loginimg.jpeg";
 import { LoginFormData } from "../constants";
 import { useUserContext } from "../context/UserContext";
 import { useRouter } from "next/navigation";
+import PulseLoader from "react-spinners/PulseLoader";
+
+const override = {
+	display: "block",
+	margin: "0 auto",
+	borderColor: "#F89878",
+};
 
 const Login = () => {
 	const { login } = useUserContext();
@@ -14,6 +21,7 @@ const Login = () => {
 		password: "",
 	});
 	const [isChecked, setIsChecked] = useState<boolean>(false);
+	const [loading, setLoading] = useState<boolean>(false);
 
 	const handleCheckboxChange = (e: ChangeEvent<HTMLInputElement>) => {
 		setIsChecked(e.target.checked);
@@ -25,18 +33,36 @@ const Login = () => {
 		setFormData({ ...formData, [e.target.name]: e.target.value });
 	};
 
-	const handleSubmit = (e: React.FormEvent) => {
+	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
+		setLoading(true);
 		try {
 			const userData = {
 				email: formData.email,
 				password: formData.password,
 			};
-			login(userData.email, userData.password);
+			await login(userData.email, userData.password);
+			setLoading(false);
 		} catch (error) {
+			setLoading(false);
 			console.error("Error logging in:", error);
 		}
 	};
+
+	if (loading) {
+		return (
+			<div className="flex bg-[#f3f3f3] h-[100vh] items-center">
+				<PulseLoader
+					color={"#0F88D9"}
+					cssOverride={override}
+					size={20}
+					aria-label="Loading Spinner"
+					data-testid="loader"
+				/>
+			</div>
+		);
+	}
+
 	return (
 		<div className="flex row w-[100%] h-[100vh]">
 			<div className="w-[100%] md:w-1/2 flex flex-col justify-center items-center">
@@ -119,6 +145,7 @@ const Login = () => {
 							Don't have an account?{" "}
 							<span
 								onClick={() => {
+									setLoading(true)
 									router.push("/signup");
 								}}
 								className="font-[600] text-[#27779B] hover:text-purple-800 hover:cursor-pointer"

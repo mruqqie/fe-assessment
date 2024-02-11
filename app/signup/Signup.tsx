@@ -6,6 +6,13 @@ import stars from "../assets/Stars.png";
 import { SignupFormData } from "../constants";
 import { useUserContext } from "../context/UserContext";
 import { useRouter } from "next/navigation";
+import PulseLoader from "react-spinners/PulseLoader";
+
+const override = {
+	display: "block",
+	margin: "0 auto",
+	borderColor: "#F89878",
+};
 
 const Signup = () => {
 	const { signup } = useUserContext();
@@ -14,14 +21,16 @@ const Signup = () => {
 		email: "",
 		password: "",
 	});
+	const [loading, setLoading] = useState<boolean>(false);
 	const router = useRouter();
 	const handleChange = (
 		e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
 	) => {
 		setFormData({ ...formData, [e.target.name]: e.target.value });
 	};
-	const handleSubmit = (e: React.FormEvent) => {
+	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
+		setLoading(true);
 		try {
 			if (formData.password.length < 8) {
 				alert("Password must be at least 8 characters");
@@ -48,11 +57,27 @@ const Signup = () => {
 				email: formData.email,
 				password: formData.password,
 			};
-			signup(userData);
+			await signup(userData);
+			setLoading(false);
 		} catch (error) {
+			setLoading(false);
 			console.error("Error creating user:", error);
 		}
 	};
+
+	if (loading) {
+		return (
+			<div className="flex bg-[#f3f3f3] h-[100vh] items-center">
+				<PulseLoader
+					color={"#0F88D9"}
+					cssOverride={override}
+					size={20}
+					aria-label="Loading Spinner"
+					data-testid="loader"
+				/>
+			</div>
+		);
+	}
 
 	return (
 		<div className="flex flex-row">
@@ -169,6 +194,7 @@ const Signup = () => {
 							Already have an account?{" "}
 							<span
 								onClick={() => {
+									setLoading(true)
 									router.push("/login");
 								}}
 								className="font-[600] text-[#27779B] hover:text-purple-800 hover:cursor-pointer"
