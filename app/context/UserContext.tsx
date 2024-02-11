@@ -7,10 +7,9 @@ import {
 	useState,
 } from "react";
 import { useRouter } from "next/navigation";
-import { User, UserContextValue, UserData } from "../constants";
+import { User, UserContextValue } from "../constants";
 import axios from "axios";
 import { useCookies } from "react-cookie";
-import { response } from "express";
 
 interface UserContextProps {
 	children: ReactNode;

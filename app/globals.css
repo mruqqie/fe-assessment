@@ -58,10 +58,9 @@ body {
 	cursor: pointer;
 }
 
-/* Show the custom checkmark when the checkbox is checked */
 .custom-checkbox input[type="checkbox"]:checked + label::before {
-	content: "\2713"; /* Unicode character for checkmark */
-	color: rgb(147 51 234); /* Adjust color as needed */
+	content: "\2713";
+	color: rgb(147 51 234);
 	font-size: 16px;
 	text-align: center;
 	line-height: 16px;

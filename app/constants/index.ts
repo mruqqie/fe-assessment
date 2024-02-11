@@ -9,13 +9,6 @@ export interface SignupFormData {
 	password: string;
 }
 
-export interface UserData {
-	response: {
-		email: string;
-		firstname: string;
-	};
-}
-
 export interface User {
 	name: string;
 	email: string;
