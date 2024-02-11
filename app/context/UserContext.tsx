@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import { User, UserContextValue, UserData } from "../constants";
 import axios from "axios";
 import { useCookies } from "react-cookie";
+import { response } from "express";
 
 interface UserContextProps {
 	children: ReactNode;
@@ -50,7 +51,7 @@ export const UserProvider: React.FC<UserContextProps> = ({ children }) => {
 				}
 			);
 			if (response.status === 200) {
-				alert("User signed up successfully. Proceeding to login.");
+				alert("User signed up successfully. Proceeding to login page.");
 				router.push("/login");
 			} else {
 				console.error("Failed to sign up user.");
@@ -88,7 +89,7 @@ export const UserProvider: React.FC<UserContextProps> = ({ children }) => {
 			}
 		} catch (error) {
 			console.error("Error during login:", error);
-			alert(error)
+			alert("Error logging in, please try again.")
 		}
 	};
 

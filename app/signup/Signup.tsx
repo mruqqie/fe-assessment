@@ -39,6 +39,10 @@ const Signup = () => {
 				);
 				return;
 			}
+			if (!/\d/.test(formData.password)) {
+				alert("Passwords must have at least one digit ('0'-'9').");
+				return;
+			}
 			const userData = {
 				name: formData.name,
 				email: formData.email,
@@ -108,7 +112,7 @@ const Signup = () => {
 									name="name"
 									onChange={handleChange}
 									value={formData.name}
-									placeholder="Enter your email"
+									placeholder="Enter your name"
 									className="border border-[#D0D5DD] focus:outline-none focus:ring-4 focus:ring-purple-100 rounded-lg w-[100%] h-[44px] px-[10px] py-[14px]"
 									required
 								/>
