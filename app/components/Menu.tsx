@@ -36,11 +36,11 @@ const Menu = () => {
 			>
 				{open ? (
 					<ul className="flex flex-col gap-2 h-[100vh] shadow-xl p-4 rounded-md border border-gray-300 transition-all">
-						<button
-							className="flex justify-end"
-							onClick={handleOpen}
-						>
-							<p className="text-right px-1 rounded-md w-max bg-gray-300">
+						<button className="flex justify-end">
+							<p
+								className="text-right px-1 rounded-md w-max bg-gray-300"
+								onClick={handleOpen}
+							>
 								X
 							</p>
 						</button>
