@@ -1,8 +1,11 @@
 {
   "name": "frontend_assesment",
   "version": "0.1.0",
+  "homepage": "https://mruqqie.github.io/fe-assessment/",
   "private": true,
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -12,6 +15,7 @@
     "@meinefinsternis/react-horizontal-date-picker": "^1.0.1",
     "axios": "^1.6.7",
     "date-fns": "^3.3.1",
+    "gh-pages": "^6.1.1",
     "next": "14.0.4",
     "react": "^18.2.0",
     "react-cookie": "^7.0.2",
