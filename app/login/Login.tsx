@@ -142,7 +142,7 @@ const Login = () => {
 					</div>
 					<div>
 						<p className="font-[400] text-sm">
-							Don't have an account?{" "}
+							Don&apos;t have an account?{" "}
 							<span
 								onClick={() => {
 									setLoading(true)
